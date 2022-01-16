@@ -4,11 +4,12 @@ import (
 	"log"
 	"net"
 
-	"github.com/royleochan/recall/services/user/src/userpb"
+	"github.com/royleochan/recall/services/user/userpb"
 	"google.golang.org/grpc"
 )
 
 func main() {
+	log.Println("User Service")
 
 	lis, err := net.Listen("tcp", ":9000")
 	if err != nil {
