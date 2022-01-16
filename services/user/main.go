@@ -4,6 +4,7 @@ import (
 	"log"
 	"net"
 
+	"github.com/royleochan/recall/services/user/handlers"
 	"github.com/royleochan/recall/services/user/userpb"
 	"google.golang.org/grpc"
 )
@@ -17,7 +18,7 @@ func main() {
 	}
 
 	grpcServer := grpc.NewServer()
-	userpb.RegisterUserServiceServer(grpcServer, &userpb.UnimplementedUserServiceServer{})
+	userpb.RegisterUserServiceServer(grpcServer, &handlers.Server{})
 
 	err = grpcServer.Serve(lis)
 	if err != nil {
