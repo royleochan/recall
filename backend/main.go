@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	"github.com/royleochan/recall/services/user/src/userpb"
+	"github.com/royleochan/recall/services/user/userpb"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
@@ -24,5 +24,5 @@ func main() {
 	if err != nil {
 		log.Fatalf("Error when calling GetUser: %s", err)
 	}
-	log.Printf("Response from server: %d", response.UserId)
+	log.Printf("Response from server: %s", response.UserId)
 }
