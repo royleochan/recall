@@ -20,7 +20,7 @@ func main() {
 
 	c := userpb.NewUserServiceClient(conn)
 
-	response, err := c.GetUser(context.Background(), &userpb.GetUserRequest{UserId: 2})
+	response, err := c.GetUser(context.Background(), &userpb.GetUserRequest{UserId: "61e54bea1c08df43560bf3db"})
 	if err != nil {
 		log.Fatalf("Error when calling GetUser: %s", err)
 	}

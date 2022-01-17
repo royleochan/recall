@@ -1,18 +1,24 @@
 package handlers
 
 import (
-	"log"
-
+	"github.com/royleochan/recall/services/user/schemas"
 	"github.com/royleochan/recall/services/user/userpb"
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/mongo"
 	"golang.org/x/net/context"
 )
 
 type Server struct {
+	*mongo.Collection
 	userpb.UnimplementedUserServiceServer
 }
 
 func (s *Server) GetUser(ctx context.Context, req *userpb.GetUserRequest) (*userpb.GetUserResponse, error) {
-	log.Println("Called GetUser Operation")
+	var user = schemas.User{}
+	err := s.Collection.FindOne(ctx, bson.M{"_id": req.UserId}).Decode(&user)
+	if err != nil {
+		return nil, err
+	}
 
-	return &userpb.GetUserResponse{UserId: req.UserId}, nil
+	return &userpb.GetUserResponse{UserId: user.Id.Hex()}, nil
 }

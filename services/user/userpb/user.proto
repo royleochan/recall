@@ -4,11 +4,12 @@ package userpb;
 option go_package = "./;userpb";
 
 message GetUserRequest {
-  int32 user_id = 1;
+  string user_id = 1;
 }
 
 message GetUserResponse {
-  int32 user_id = 1;
+  string user_id = 1;
+  string username = 2;
 }
 
 service UserService {
