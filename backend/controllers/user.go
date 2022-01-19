@@ -11,6 +11,9 @@ import (
 type User struct {
 	Id       string `json:"id"`
 	Username string `json:"username"`
+	Email    string `json:"email"`
+	Name     string `json:"name"`
+	Avatar   string `json:"avatar"`
 }
 
 func GetUserById(c *gin.Context) {
@@ -19,6 +22,6 @@ func GetUserById(c *gin.Context) {
 	if err != nil {
 		utils.HandleGrpcError(c, err)
 	} else {
-		c.JSON(http.StatusOK, gin.H{"data": &User{Id: user.UserId, Username: user.Username}})
+		c.JSON(http.StatusOK, gin.H{"data": &User{Id: user.UserId, Username: user.Username, Email: user.Email, Name: user.Name, Avatar: user.Avatar}})
 	}
 }
