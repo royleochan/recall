@@ -29,7 +29,8 @@ func main() {
 	DB_NAME := os.Getenv("DB_NAME")
 	MONGO_CONN_STRING := fmt.Sprintf("mongodb+srv://%s:%s@cluster0.karg0.mongodb.net/%s?retryWrites=true&w=majority", DB_USER, DB_PASSWORD, DB_NAME)
 
-	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
 	client, err := mongo.Connect(ctx, options.Client().ApplyURI(MONGO_CONN_STRING))
 	if err != nil {
 		log.Fatalf("Failed to connect to database: %s", err)
@@ -50,7 +51,7 @@ func main() {
 	}
 
 	grpcServer := grpc.NewServer()
-	userpb.RegisterUserServiceServer(grpcServer, &handlers.Server{usersCollection, userpb.UnimplementedUserServiceServer{}})
+	userpb.RegisterUserServiceServer(grpcServer, &handlers.Server{Collection: usersCollection, UserServiceServer: userpb.UnimplementedUserServiceServer{}})
 
 	log.Printf("Starting user service at %v", lis.Addr().String())
 	err = grpcServer.Serve(lis)

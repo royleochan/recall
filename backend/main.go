@@ -1,28 +1,21 @@
 package main
 
 import (
-	"log"
-
-	"github.com/royleochan/recall/services/user/userpb"
-	"golang.org/x/net/context"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials/insecure"
+	"github.com/gin-gonic/gin"
+	"github.com/royleochan/recall/backend/datasources"
+	"github.com/royleochan/recall/backend/routes"
 )
 
 func main() {
+	// Connect to datasources
+	user_conn, _ := datasources.InitUserServiceConn()
+	defer user_conn.Close()
 
-	var conn *grpc.ClientConn
-	conn, err := grpc.Dial(":9000", grpc.WithTransportCredentials(insecure.NewCredentials()))
-	if err != nil {
-		log.Fatalf("did not connect: %s", err)
-	}
-	defer conn.Close()
+	// Creates a gin router with default middleware: logger and recovery (crash-free) middleware
+	// Initialize custom routes
+	router := gin.Default()
+	routes.InitUserRoutes(router)
 
-	c := userpb.NewUserServiceClient(conn)
-
-	response, err := c.GetUser(context.Background(), &userpb.GetUserRequest{UserId: "61e54bea1c08df43560bf3db"})
-	if err != nil {
-		log.Fatalf("Error when calling GetUser: %s", err)
-	}
-	log.Printf("Response from server: %s", response.UserId)
+	// listen and serve on 0.0.0.0:8080
+	router.Run()
 }
