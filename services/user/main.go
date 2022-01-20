@@ -2,47 +2,27 @@ package main
 
 import (
 	"context"
-	"fmt"
 	"log"
 	"net"
-	"os"
 	"time"
 
-	"github.com/joho/godotenv"
 	"github.com/royleochan/recall/services/user/handlers"
 	"github.com/royleochan/recall/services/user/userpb"
-	"go.mongodb.org/mongo-driver/mongo"
-	"go.mongodb.org/mongo-driver/mongo/options"
+	"github.com/royleochan/recall/services/user/utils"
 	"google.golang.org/grpc"
 )
 
 func main() {
-	// Load env variables
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Failed to load .env file")
-	}
-
-	// Connect to DB
-	DB_USER := os.Getenv("DB_USER")
-	DB_PASSWORD := os.Getenv("DB_PASSWORD")
-	DB_NAME := os.Getenv("DB_NAME")
-	MONGO_CONN_STRING := fmt.Sprintf("mongodb+srv://%s:%s@cluster0.karg0.mongodb.net/%s?retryWrites=true&w=majority", DB_USER, DB_PASSWORD, DB_NAME)
-
+	// Initialise database connection
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
-	client, err := mongo.Connect(ctx, options.Client().ApplyURI(MONGO_CONN_STRING))
-	if err != nil {
-		log.Fatalf("Failed to connect to database: %s", err)
-	}
+	client, err, db_name := utils.InitDb(ctx)
 	defer func() {
 		if err = client.Disconnect(ctx); err != nil {
 			panic(err)
 		}
 	}()
-	usersCollection := client.Database(DB_NAME).Collection("users")
-
-	log.Println("Connected to database")
+	usersCollection := client.Database(db_name).Collection("users")
 
 	// Setup TCP connection and GRPC server with handlers
 	lis, err := net.Listen("tcp", ":9000")
