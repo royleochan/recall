@@ -4,9 +4,9 @@ services:
   flashcard:
     build: .
     ports:
-      - 8080:8080
+      - 9001:9001
     environment:
-      PORT: 8080
+      PORT: 9001
     depends_on:
       - db
   db:
