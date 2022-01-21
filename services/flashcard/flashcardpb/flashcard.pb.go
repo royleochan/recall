@@ -547,7 +547,7 @@ var file_flashcard_proto_rawDesc = []byte{
 	0x72, 0x6f, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x65, 0x72, 0x72, 0x6f, 0x72,
 	0x32, 0xc4, 0x03, 0x0a, 0x10, 0x46, 0x6c, 0x61, 0x73, 0x68, 0x63, 0x61, 0x72, 0x64, 0x53, 0x65,
 	0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x61, 0x0a, 0x10, 0x47, 0x65, 0x74, 0x46, 0x6c, 0x61, 0x73,
-	0x68, 0x43, 0x61, 0x72, 0x64, 0x42, 0x79, 0x49, 0x64, 0x12, 0x24, 0x2e, 0x66, 0x6c, 0x61, 0x73,
+	0x68, 0x63, 0x61, 0x72, 0x64, 0x42, 0x79, 0x49, 0x64, 0x12, 0x24, 0x2e, 0x66, 0x6c, 0x61, 0x73,
 	0x68, 0x63, 0x61, 0x72, 0x64, 0x70, 0x62, 0x2e, 0x47, 0x65, 0x74, 0x46, 0x6c, 0x61, 0x73, 0x68,
 	0x63, 0x61, 0x72, 0x64, 0x42, 0x79, 0x49, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a,
 	0x25, 0x2e, 0x66, 0x6c, 0x61, 0x73, 0x68, 0x63, 0x61, 0x72, 0x64, 0x70, 0x62, 0x2e, 0x47, 0x65,
@@ -603,12 +603,12 @@ var file_flashcard_proto_goTypes = []interface{}{
 }
 var file_flashcard_proto_depIdxs = []int32{
 	0, // 0: flashcardpb.GetFlashcardByIdResponse.board:type_name -> flashcardpb.Board
-	1, // 1: flashcardpb.FlashcardService.GetFlashCardById:input_type -> flashcardpb.GetFlashcardByIdRequest
+	1, // 1: flashcardpb.FlashcardService.GetFlashcardById:input_type -> flashcardpb.GetFlashcardByIdRequest
 	3, // 2: flashcardpb.FlashcardService.GetFlashcards:input_type -> flashcardpb.GetFlashcardsRequest
 	4, // 3: flashcardpb.FlashcardService.CreateFlashcard:input_type -> flashcardpb.CreateFlashcardRequest
 	5, // 4: flashcardpb.FlashcardService.UpdateFlashcard:input_type -> flashcardpb.UpdateFlashcardRequest
 	6, // 5: flashcardpb.FlashcardService.DeleteFlashcard:input_type -> flashcardpb.DeleteFlashcardRequest
-	2, // 6: flashcardpb.FlashcardService.GetFlashCardById:output_type -> flashcardpb.GetFlashcardByIdResponse
+	2, // 6: flashcardpb.FlashcardService.GetFlashcardById:output_type -> flashcardpb.GetFlashcardByIdResponse
 	2, // 7: flashcardpb.FlashcardService.GetFlashcards:output_type -> flashcardpb.GetFlashcardByIdResponse
 	7, // 8: flashcardpb.FlashcardService.CreateFlashcard:output_type -> flashcardpb.Default
 	7, // 9: flashcardpb.FlashcardService.UpdateFlashcard:output_type -> flashcardpb.Default
@@ -755,7 +755,7 @@ const _ = grpc.SupportPackageIsVersion6
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type FlashcardServiceClient interface {
-	GetFlashCardById(ctx context.Context, in *GetFlashcardByIdRequest, opts ...grpc.CallOption) (*GetFlashcardByIdResponse, error)
+	GetFlashcardById(ctx context.Context, in *GetFlashcardByIdRequest, opts ...grpc.CallOption) (*GetFlashcardByIdResponse, error)
 	GetFlashcards(ctx context.Context, in *GetFlashcardsRequest, opts ...grpc.CallOption) (FlashcardService_GetFlashcardsClient, error)
 	CreateFlashcard(ctx context.Context, in *CreateFlashcardRequest, opts ...grpc.CallOption) (*Default, error)
 	UpdateFlashcard(ctx context.Context, in *UpdateFlashcardRequest, opts ...grpc.CallOption) (*Default, error)
@@ -770,9 +770,9 @@ func NewFlashcardServiceClient(cc grpc.ClientConnInterface) FlashcardServiceClie
 	return &flashcardServiceClient{cc}
 }
 
-func (c *flashcardServiceClient) GetFlashCardById(ctx context.Context, in *GetFlashcardByIdRequest, opts ...grpc.CallOption) (*GetFlashcardByIdResponse, error) {
+func (c *flashcardServiceClient) GetFlashcardById(ctx context.Context, in *GetFlashcardByIdRequest, opts ...grpc.CallOption) (*GetFlashcardByIdResponse, error) {
 	out := new(GetFlashcardByIdResponse)
-	err := c.cc.Invoke(ctx, "/flashcardpb.FlashcardService/GetFlashCardById", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/flashcardpb.FlashcardService/GetFlashcardById", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -840,7 +840,7 @@ func (c *flashcardServiceClient) DeleteFlashcard(ctx context.Context, in *Delete
 
 // FlashcardServiceServer is the server API for FlashcardService service.
 type FlashcardServiceServer interface {
-	GetFlashCardById(context.Context, *GetFlashcardByIdRequest) (*GetFlashcardByIdResponse, error)
+	GetFlashcardById(context.Context, *GetFlashcardByIdRequest) (*GetFlashcardByIdResponse, error)
 	GetFlashcards(*GetFlashcardsRequest, FlashcardService_GetFlashcardsServer) error
 	CreateFlashcard(context.Context, *CreateFlashcardRequest) (*Default, error)
 	UpdateFlashcard(context.Context, *UpdateFlashcardRequest) (*Default, error)
@@ -851,8 +851,8 @@ type FlashcardServiceServer interface {
 type UnimplementedFlashcardServiceServer struct {
 }
 
-func (*UnimplementedFlashcardServiceServer) GetFlashCardById(context.Context, *GetFlashcardByIdRequest) (*GetFlashcardByIdResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetFlashCardById not implemented")
+func (*UnimplementedFlashcardServiceServer) GetFlashcardById(context.Context, *GetFlashcardByIdRequest) (*GetFlashcardByIdResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetFlashcardById not implemented")
 }
 func (*UnimplementedFlashcardServiceServer) GetFlashcards(*GetFlashcardsRequest, FlashcardService_GetFlashcardsServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetFlashcards not implemented")
@@ -871,20 +871,20 @@ func RegisterFlashcardServiceServer(s *grpc.Server, srv FlashcardServiceServer) 
 	s.RegisterService(&_FlashcardService_serviceDesc, srv)
 }
 
-func _FlashcardService_GetFlashCardById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _FlashcardService_GetFlashcardById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetFlashcardByIdRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(FlashcardServiceServer).GetFlashCardById(ctx, in)
+		return srv.(FlashcardServiceServer).GetFlashcardById(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/flashcardpb.FlashcardService/GetFlashCardById",
+		FullMethod: "/flashcardpb.FlashcardService/GetFlashcardById",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FlashcardServiceServer).GetFlashCardById(ctx, req.(*GetFlashcardByIdRequest))
+		return srv.(FlashcardServiceServer).GetFlashcardById(ctx, req.(*GetFlashcardByIdRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -969,8 +969,8 @@ var _FlashcardService_serviceDesc = grpc.ServiceDesc{
 	HandlerType: (*FlashcardServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "GetFlashCardById",
-			Handler:    _FlashcardService_GetFlashCardById_Handler,
+			MethodName: "GetFlashcardById",
+			Handler:    _FlashcardService_GetFlashcardById_Handler,
 		},
 		{
 			MethodName: "CreateFlashcard",

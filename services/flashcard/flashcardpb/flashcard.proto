@@ -48,7 +48,7 @@ message Default {
 }
 
 service FlashcardService {
-  rpc GetFlashCardById(GetFlashcardByIdRequest) returns (GetFlashcardByIdResponse) {}
+  rpc GetFlashcardById(GetFlashcardByIdRequest) returns (GetFlashcardByIdResponse) {}
   rpc GetFlashcards(GetFlashcardsRequest) returns (stream GetFlashcardByIdResponse) {}
   rpc CreateFlashcard(CreateFlashcardRequest) returns (Default) {}
   rpc UpdateFlashcard(UpdateFlashcardRequest) returns (Default) {}
