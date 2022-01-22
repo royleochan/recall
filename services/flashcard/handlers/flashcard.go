@@ -21,7 +21,7 @@ type FlashcardResponse struct {
 func (s *Server) GetFlashcardById(ctx context.Context, req *flashcardpb.GetFlashcardByIdRequest) (*flashcardpb.GetFlashcardByIdResponse, error) {
 	var res FlashcardResponse
 
-	query := s.Db.Model(&models.Flashcard{}).Select("flashcards.id, flashcards.title, flashcards.answer, boards.name, boards.creator").Joins("join boards on boards.id = flashcards.board_id").First(&res)
+	query := s.Db.Model(&models.Flashcard{}).Select("flashcards.id, flashcards.title, flashcards.answer, boards.name, boards.creator").Joins("join boards on boards.id = flashcards.board_id").Where("flashcards.id = ?", req.FlashcardId).First(&res)
 	if query.Error != nil {
 		return nil, query.Error
 	}
