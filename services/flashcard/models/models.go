@@ -7,6 +7,8 @@ import (
 
 type Board struct {
 	gorm.Model
+	Parent     *Board
+	ParentID   uint
 	Flashcards []Flashcard
 	Name       string
 	Creator    string

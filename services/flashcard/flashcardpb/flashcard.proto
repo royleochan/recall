@@ -4,25 +4,28 @@ package flashcardpb;
 option go_package = "./;flashcardpb";
 
 message Board {
-  string name = 1;
-  string creator = 2;
-  repeated string users = 3;
+  int64 board_id = 1;
+  int64 parent_id = 2;
+  string name = 3;
+  string creator = 4;
+  repeated string users = 5;
 }
 
 message GetFlashcardByIdRequest {
   int64 flashcard_id = 1;
 }
 
+message GetFlashcardsRequest {
+  string creator = 1;
+  int64 board = 2;
+}
+
 message GetFlashcardByIdResponse {
   int64 flashcard_id = 1;
   string title = 3;
   string answer = 4;
-  Board board = 5;
-}
-
-message GetFlashcardsRequest {
-  string creator = 1;
-  int64 board = 2;
+  string board = 5;
+  string creator = 6;
 }
 
 message CreateFlashcardRequest {

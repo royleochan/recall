@@ -4,7 +4,6 @@ import (
 	"context"
 
 	"github.com/royleochan/recall/services/flashcard/flashcardpb"
-	"github.com/royleochan/recall/services/flashcard/models"
 	"gorm.io/gorm"
 )
 
@@ -14,13 +13,13 @@ type Server struct {
 }
 
 func (s *Server) GetFlashcardById(ctx context.Context, req *flashcardpb.GetFlashcardByIdRequest) (*flashcardpb.GetFlashcardByIdResponse, error) {
-	var flashcard models.Flashcard
-	result := s.Db.First(&flashcard, req.FlashcardId)
+	var flashcard flashcardpb.GetFlashcardByIdResponse
+	result := s.Db.First(&flashcard, req.FlashcardId).Select("flashcards.id, flashcards.title, flashcards.answer, boards.name, boards.creator").Joins("join boards on boards.id = flashcards.board_id")
 	if result.Error != nil {
 		return nil, result.Error
 	}
 
-	return &flashcardpb.GetFlashcardByIdResponse{FlashcardId: int64(flashcard.ID), Title: flashcard.Title, Answer: flashcard.Answer, Board: nil}, nil
+	return &flashcard, nil
 }
 
 func (s *Server) GetFlashcards(req *flashcardpb.GetFlashcardsRequest, stream flashcardpb.FlashcardService_GetFlashcardsServer) error {
