@@ -23,12 +23,12 @@ type Flashcard struct {
 
 func GetFlashcardById(c *gin.Context) {
 	flashcardId, _ := strconv.Atoi(c.Param("flashcard_id"))
-	flashcard, err := datasources.GetFlashcardById(int64(flashcardId))
+	res, err := datasources.GetFlashcardById(int64(flashcardId))
 
 	if err != nil {
 		utils.HandleGrpcError(c, err)
 	} else {
-		// board := &Board{Name: flashcard.Board.Name, Creator: flashcard.Board.Creator}
-		c.JSON(http.StatusOK, gin.H{"data": &Flashcard{Id: flashcard.FlashcardId, Title: flashcard.Title, Answer: flashcard.Answer}})
+		board := &Board{Name: res.Board, Creator: res.Creator}
+		c.JSON(http.StatusOK, gin.H{"data": &Flashcard{Id: res.FlashcardId, Title: res.Title, Answer: res.Answer, Board: *board}})
 	}
 }

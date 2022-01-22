@@ -3,6 +3,7 @@ module github.com/royleochan/recall/backend
 go 1.17
 
 require (
+	github.com/royleochan/recall/services/flashcard v0.0.0-20220122054518-2e77b3e8b649 // indirect
 	github.com/royleochan/recall/services/user v0.0.0-20220121155559-01133f9b8cb2
 	google.golang.org/grpc v1.43.0
 )
@@ -34,7 +35,6 @@ require (
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/rogpeppe/go-internal v1.8.1 // indirect
-	github.com/royleochan/recall/services/flashcard v0.0.0-20220121155559-01133f9b8cb2 // indirect
 	github.com/ugorji/go/codec v1.2.6 // indirect
 	github.com/xdg-go/pbkdf2 v1.0.0 // indirect
 	github.com/xdg-go/scram v1.0.2 // indirect

@@ -189,6 +189,8 @@ github.com/rogpeppe/go-internal v1.8.1 h1:geMPLpDpQOgVyCg5z5GoRwLHepNdb71NXb67XF
 github.com/rogpeppe/go-internal v1.8.1/go.mod h1:JeRgkft04UBgHMgCIwADu4Pn6Mtm5d4nPKWu0nJ5d+o=
 github.com/royleochan/recall/services/flashcard v0.0.0-20220121155559-01133f9b8cb2 h1:C/C2vbRqNDhRSJFg8vk1v86CTQ/E99vMaf+S4+WB6Xs=
 github.com/royleochan/recall/services/flashcard v0.0.0-20220121155559-01133f9b8cb2/go.mod h1:fVKIfttnK3QB9vtXAQp24SIC831iMK5aIwpkmVK4fI4=
+github.com/royleochan/recall/services/flashcard v0.0.0-20220122054518-2e77b3e8b649 h1:eaTyMGMRPpY7iliCLtC61gyiZwSiZ/fCiivYcHbR6CU=
+github.com/royleochan/recall/services/flashcard v0.0.0-20220122054518-2e77b3e8b649/go.mod h1:fVKIfttnK3QB9vtXAQp24SIC831iMK5aIwpkmVK4fI4=
 github.com/royleochan/recall/services/user v0.0.0-20220119163852-36f81172c2e2 h1:bfQChj/PPChoyK1HhRNITZMEV8nAZaB2tdqgUACywfg=
 github.com/royleochan/recall/services/user v0.0.0-20220119163852-36f81172c2e2/go.mod h1:k9EMTHKYXqaf6AZDcuCgeBl8/uPq/+qP0as5+j/T5/s=
 github.com/royleochan/recall/services/user v0.0.0-20220119174218-741408edf174 h1:owv0RfIwo2Di5imQjuwsAzbtkjVXF/y9JZsAP7GRzRI=

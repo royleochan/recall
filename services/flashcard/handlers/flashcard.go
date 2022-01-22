@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/royleochan/recall/services/flashcard/flashcardpb"
+	"github.com/royleochan/recall/services/flashcard/models"
 	"gorm.io/gorm"
 )
 
@@ -12,14 +13,20 @@ type Server struct {
 	FlashcardServiceServer flashcardpb.UnimplementedFlashcardServiceServer
 }
 
+type FlashcardResponse struct {
+	models.Flashcard
+	models.Board
+}
+
 func (s *Server) GetFlashcardById(ctx context.Context, req *flashcardpb.GetFlashcardByIdRequest) (*flashcardpb.GetFlashcardByIdResponse, error) {
-	var flashcard flashcardpb.GetFlashcardByIdResponse
-	result := s.Db.First(&flashcard, req.FlashcardId).Select("flashcards.id, flashcards.title, flashcards.answer, boards.name, boards.creator").Joins("join boards on boards.id = flashcards.board_id")
-	if result.Error != nil {
-		return nil, result.Error
+	var res FlashcardResponse
+
+	query := s.Db.Model(&models.Flashcard{}).Select("flashcards.id, flashcards.title, flashcards.answer, boards.name, boards.creator").Joins("join boards on boards.id = flashcards.board_id").First(&res)
+	if query.Error != nil {
+		return nil, query.Error
 	}
 
-	return &flashcard, nil
+	return &flashcardpb.GetFlashcardByIdResponse{FlashcardId: int64(res.Flashcard.ID), Title: res.Title, Answer: res.Answer, Board: res.Name, Creator: res.Creator}, nil
 }
 
 func (s *Server) GetFlashcards(req *flashcardpb.GetFlashcardsRequest, stream flashcardpb.FlashcardService_GetFlashcardsServer) error {
