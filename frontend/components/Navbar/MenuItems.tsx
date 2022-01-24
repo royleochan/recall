@@ -1,7 +1,9 @@
 import React, { ReactNode } from "react";
 import { Box, Link, Stack, useColorModeValue } from "@chakra-ui/react";
 import NextLink from "next/link";
+
 import ToggleColor from "./ToggleColor";
+import Profile from "./Profile";
 
 interface MenuItemProps {
   children: ReactNode;
@@ -37,9 +39,9 @@ const MenuItems = ({ isOpen }: MenuItemsProps) => {
         direction={["column", "column", "row", "row"]}
         pt={[4, 4, 0, 0]}
       >
-        <MenuItem target="/">About</MenuItem>
         <MenuItem target="/flashcards">Flashcards</MenuItem>
         <ToggleColor />
+        <Profile />
       </Stack>
     </Box>
   );

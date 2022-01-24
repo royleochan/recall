@@ -1,13 +1,23 @@
 import type { NextPage } from "next";
-import { Container } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 
-import Page from "@/components/Page";
+import Layout from "@/components/Layout";
+import SiderMenu from "@/components/SiderMenu";
+import Card from "@/components/Card";
 
 const Flashcards: NextPage = () => {
   return (
-    <Page>
-      <Container>Flashcards</Container>
-    </Page>
+    <Layout>
+      <SiderMenu />
+      <Box alignSelf="flex-start" pl={[12, 300]}>
+        <Text fontSize="xxl" fontWeight="bold">
+          CS3230
+        </Text>
+        <Box>
+          <Card />
+        </Box>
+      </Box>
+    </Layout>
   );
 };
 

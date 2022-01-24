@@ -2,13 +2,13 @@ import { ThemeConfig, theme as baseTheme } from "@chakra-ui/react";
 
 export const customTheme: Object = {
   colors: {
-    light: baseTheme.colors.yellow['300'],
-    dark: baseTheme.colors.gray['700'],
+    light: baseTheme.colors.yellow["300"],
+    dark: baseTheme.colors.gray["700"],
     primary: {
       main: baseTheme.colors.red,
     },
     secondary: {
-      main: baseTheme.colors.gray,
+      main: baseTheme.colors.green,
     },
   },
   fontSizes: {
@@ -17,6 +17,11 @@ export const customTheme: Object = {
     md: "1rem",
     lg: "1.125rem",
     xl: "1.25rem",
+    xxl: "2.5rem",
+    xxxl: "6rem",
+  },
+  fonts: {
+    paragraph: "avenir",
   },
   fontWeights: {
     light: 300,
