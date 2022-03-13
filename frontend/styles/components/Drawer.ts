@@ -1,11 +1,14 @@
 export const Drawer = {
   variants: {
+    baseStyle: {
+      height: 0,
+    },
     permanent: {
-      dialog: {
-        pointerEvents: "auto",
-      },
       dialogContainer: {
-        pointerEvents: "none",
+        width: 0,
+      },
+      dialog: {
+        top: '100px'
       },
     },
   },
