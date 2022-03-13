@@ -11,6 +11,10 @@ const Card = () => {
       my={6}
       p={8}
       w="400px"
+      _hover={{
+        bg: isFlipped ? "secondary.main.300" : "",
+        borderWidth: !isFlipped ? 3 : 1,
+      }}
       borderWidth={1}
       borderRadius={10}
       borderColor={isFlipped ? "secondary.main.300" : "primary.main.300"}
